@@ -1,0 +1,69 @@
+{
+  "unity_ros2_bridge": {
+    "connection_settings": {
+      "domain_id": 0,
+      "dds_profile": "default",
+      "reliable_qos": true,
+      "history_depth": 10
+    },
+    "topics": [
+      {
+        "name": "/unity_robot_state",
+        "type": "sensor_msgs/JointState",
+        "qos": {
+          "reliability": "reliable",
+          "durability": "volatile",
+          "history": "keep_last",
+          "depth": 10
+        }
+      },
+      {
+        "name": "/unity_odom",
+        "type": "nav_msgs/Odometry",
+        "qos": {
+          "reliability": "reliable",
+          "durability": "volatile",
+          "history": "keep_last",
+          "depth": 10
+        }
+      },
+      {
+        "name": "/unity_camera_image",
+        "type": "sensor_msgs/Image",
+        "qos": {
+          "reliability": "best_effort",
+          "durability": "volatile",
+          "history": "keep_last",
+          "depth": 5
+        }
+      },
+      {
+        "name": "/unity_lidar_scan",
+        "type": "sensor_msgs/LaserScan",
+        "qos": {
+          "reliability": "best_effort",
+          "durability": "volatile",
+          "history": "keep_last",
+          "depth": 5
+        }
+      }
+    ],
+    "services": [
+      {
+        "name": "/unity_reset_simulation",
+        "type": "std_srvs/Empty"
+      },
+      {
+        "name": "/unity_pause_simulation",
+        "type": "std_srvs/SetBool"
+      }
+    ],
+    "parameters": {
+      "update_rate": 60,
+      "enable_physics_sync": true,
+      "enable_visualization": true,
+      "coordinate_frame": "world",
+      "scale_factor": 1.0
+    }
+  }
+}

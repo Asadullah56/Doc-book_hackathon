@@ -1,0 +1,306 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #0d7e5c; /* Deep Emerald Green */
+  --ifm-color-primary-dark: #0b7152; /* Darker Emerald */
+  --ifm-color-primary-darker: #0a654a; /* Even Darker Emerald */
+  --ifm-color-primary-darkest: #08523d; /* Darkest Emerald */
+  --ifm-color-primary-light: #0e8b66; /* Lighter Emerald */
+  --ifm-color-primary-lighter: #0f9870; /* Even Lighter Emerald */
+  --ifm-color-primary-lightest: #10a57a; /* Lightest Emerald */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #45c7a0; /* Lighter Emerald for dark mode */
+  --ifm-color-primary-dark: #37a082; /* Darker Emerald for dark mode */
+  --ifm-color-primary-darker: #2f896f; /* Even Darker Emerald for dark mode */
+  --ifm-color-primary-darkest: #266e5a; /* Darkest Emerald for dark mode */
+  --ifm-color-primary-light: #53d4ad; /* Lighter Emerald for dark mode */
+  --ifm-color-primary-lighter: #61e1ba; /* Even Lighter Emerald for dark mode */
+  --ifm-color-primary-lightest: #70edc7; /* Lightest Emerald for dark mode */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Main background styling */
+html {
+  background-color: #ffffff;
+}
+
+body {
+  background-color: #ffffff;
+  color: #2e2e2e;
+}
+
+/* Code block styling */
+div[class*="codeBlockContainer"],
+pre,
+code {
+  border-radius: 8px;
+}
+
+/* Navbar styling with original green theme */
+.navbar {
+  background-color: #0d7e5c !important;
+  border-bottom: 1px solid #0b7152 !important;
+  position: sticky;
+  top: 0;
+  z-index: var(--ifm-z-index-fixed);
+}
+
+.navbar__title {
+  color: white !important;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.navbar__link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.navbar__link:hover {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .navbar__link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__item {
+  padding: 0.5rem 1rem;
+}
+
+.navbar__item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+[data-theme='dark'] .navbar__item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar styling for light theme */
+.menu {
+  background-color: #ffffff;
+}
+
+.menu__list-item {
+  color: #2e2e2e;
+}
+
+.menu__link {
+  color: #2e2e2e;
+}
+
+.menu__link:hover,
+.menu__link--active {
+  color: var(--ifm-color-primary);
+  background-color: rgba(13, 126, 92, 0.1);
+}
+
+/* Card styling for homepage features */
+.card {
+  background-color: #ffffff !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card__header h3 {
+  color: var(--ifm-color-primary) !important;
+}
+
+.card__body {
+  color: #2e2e2e !important;
+}
+
+/* Button style for cards */
+.card .button--secondary {
+  background-color: var(--ifm-color-emphasis-200) !important;
+  border: 1px solid var(--ifm-color-emphasis-400) !important;
+  color: var(--ifm-color-emphasis-800) !important;
+}
+
+.card .button--secondary:hover {
+  background-color: var(--ifm-color-emphasis-300) !important;
+  border-color: var(--ifm-color-emphasis-500) !important;
+  color: var(--ifm-color-emphasis-900) !important;
+}
+
+/* Button styling with original emerald green */
+.button--primary {
+  background-color: var(--ifm-color-primary) !important;
+  border-color: var(--ifm-color-primary) !important;
+  color: white !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-dark) !important;
+  border-color: var(--ifm-color-primary-dark) !important;
+  color: white !important;
+}
+
+/* Enhanced Button Styling with Hover Effects */
+.button--primary {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-light));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-light);
+  border-color: var(--ifm-color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(13, 126, 92, 0.3);
+}
+
+.button--primary:hover::before {
+  opacity: 1;
+}
+
+.button--primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+[data-theme='dark'] .button--primary {
+  box-shadow: 0 4px 8px rgba(69, 199, 160, 0.2);
+}
+
+[data-theme='dark'] .button--primary:hover {
+  box-shadow: 0 8px 20px rgba(69, 199, 160, 0.3);
+}
+
+/* Sticky Footer Implementation */
+html,
+body {
+  height: 100%;
+  min-height: 100vh;
+  
+  margin: 0;
+  padding: 0;
+}
+
+#__docusaurus {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-wrapper {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+/* Footer Styling for Compact Professional Look */
+footer.footer {
+  margin-top: auto;
+  background-color: #1a5e3a !important;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer__title {
+  color: rgba(255, 255, 255, 0.815);
+}
+
+.footer__link-item {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-light);
+}
+
+.footer__copyright {
+  color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__links {
+  margin-bottom: 1rem;
+}
+
+.footer__col {
+  margin-bottom: 1rem;
+}
+
+.footer__title {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-footer-title-color, var(--ifm-color-emphasis-100));
+}
+
+.footer__item {
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.footer .container {
+  padding: 0 1.5rem;
+}
+
+/* Compact footer link styling */
+.footer__link-item {
+  color: var(--ifm-footer-link-color, var(--ifm-color-emphasis-600));
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-footer-link-hover-color, var(--ifm-color-primary));
+}
+
+/* Footer copyright styling */
+.footer__copyright {
+  font-size: 0.8rem;
+  color: var(--ifm-footer-copyright-color, var(--ifm-color-emphasis-500));
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-800);
+}

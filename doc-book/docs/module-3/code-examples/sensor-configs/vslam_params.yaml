@@ -1,0 +1,88 @@
+# Isaac ROS VSLAM Parameters Configuration
+# Optimized for GPU-accelerated localization on humanoid robots
+
+vslam_node:
+  ros__parameters:
+    # Feature detection parameters
+    feature_detector:
+      max_features: 2000
+      quality_level: 0.01
+      min_distance: 10
+      gpu_enabled: true
+      fast_threshold: 20
+      patch_size: 31
+      max_iterations: 30
+      convergence_epsilon: 0.01
+
+    # Tracking parameters
+    tracker:
+      max_level: 3
+      max_iterations: 30
+      epsilon: 0.01
+      min_eigenvalue: 0.001
+      window_size: [21, 21]
+      termination_criteria: "both"
+
+    # Visual Inertial Odometry parameters
+    vio:
+      # IMU parameters
+      imu_rate: 400.0
+      acc_noise_density: 0.002
+      gyro_noise_density: 0.0002
+      acc_random_walk: 0.002
+      gyro_random_walk: 0.0002
+      # Camera-IMU time synchronization
+      max_time_interval: 0.01
+      # Initialization parameters
+      min_parallax: 20.0
+      init_features: 100
+
+    # Mapping parameters
+    mapper:
+      local_map_size: 50.0
+      min_keyframe_distance: 0.5
+      min_keyframe_rotation: 0.1
+      bundle_adjustment_frequency: 10
+      max_keyframes: 50
+      # Loop closure parameters
+      loop_closure:
+        enabled: true
+        detection_frequency: 5
+        min_matches: 20
+        inlier_threshold: 24.0
+        relocalization:
+          enabled: true
+          min_matches: 15
+
+    # GPU acceleration
+    gpu:
+      max_memory_usage: 0.8
+      enable_tensorrt: true
+      tensorrt_precision: "fp16"
+      cuda_device_id: 0
+      use_unified_memory: true
+
+    # Humanoid-specific parameters
+    humanoid:
+      height_offset: 1.0  # Average humanoid height for stereo processing
+      step_detection_enabled: true
+      obstacle_height_threshold: 0.3  # Objects below this are considered walkable
+      ground_plane_estimation:
+        enabled: true
+        distance_threshold: 0.1
+        max_iterations: 1000
+
+    # Performance parameters
+    performance:
+      max_processing_time: 0.05  # 50ms max processing time
+      min_feature_matches: 20    # Minimum matches for tracking
+      tracking_loss_threshold: 50 # Threshold for tracking loss
+
+    # Camera parameters (for stereo processing)
+    camera:
+      baseline: 0.2  # Stereo baseline in meters
+      focal_length: 320.0
+      principal_point: [320.0, 240.0]
+      image_width: 640
+      image_height: 480
+      distortion_coeffs: [0.0, 0.0, 0.0, 0.0, 0.0]  # Assuming rectified images

@@ -1,0 +1,83 @@
+{
+  "isaac_sim": {
+    "simulation": {
+      "physics": {
+        "gravity": [0, 0, -9.81],
+        "solver_iterations": 8,
+        "fixed_timestep": 0.008333,
+        "max_substeps": 1
+      },
+      "rendering": {
+        "resolution": [1920, 1080],
+        "framerate": 60,
+        "ray_tracing": true,
+        "max_light_bounces": 8,
+        "max_surface_bounces": 4
+      },
+      "domain_randomization": {
+        "enabled": true,
+        "lighting_randomization": {
+          "intensity_range": [500, 2000],
+          "color_temperature_range": [5000, 8000],
+          "direction_randomization": true
+        },
+        "material_randomization": {
+          "roughness_range": [0.1, 0.9],
+          "metallic_range": [0.0, 1.0],
+          "albedo_variation": 0.2
+        }
+      }
+    },
+    "sensors": {
+      "rgb_camera": {
+        "resolution": [640, 480],
+        "fov": 60,
+        "clipping_range": [0.1, 100.0],
+        "motion_blur": true,
+        "noise_model": "gaussian",
+        "noise_params": {
+          "mean": 0.0,
+          "stddev": 0.01
+        }
+      },
+      "depth_sensor": {
+        "resolution": [640, 480],
+        "fov": 60,
+        "clipping_range": [0.1, 10.0],
+        "infrared_projection": false
+      },
+      "lidar": {
+        "number_of_rays": 16,
+        "number_of_returns": 1,
+        "samples_per_scan": 1800,
+        "max_range": 25.0,
+        "rotation_frequency": 10,
+        "measurement_frequency": 48000,
+        "use_actor_pose": true
+      }
+    },
+    "humanoid_robot": {
+      "model_path": "Isaac/Robots/NVIDIA/Isaac/Robotics/Isaac_humannoid.urdf",
+      "initial_position": [0.0, 0.0, 1.0],
+      "initial_orientation": [0.0, 0.0, 0.0, 1.0],
+      "control_frequency": 200,
+      "physics_material": {
+        "static_friction": 0.5,
+        "dynamic_friction": 0.5,
+        "restitution": 0.0
+      }
+    },
+    "training_data": {
+      "output_directory": "/workspace/isaac-sim-data",
+      "annotation_format": "coco",
+      "max_episodes": 10000,
+      "episode_length": 300,
+      "data_augmentation": {
+        "enabled": true,
+        "rotation_range": 360,
+        "scale_range": [0.8, 1.2],
+        "brightness_range": [0.5, 1.5]
+      }
+    }
+  }
+}
