@@ -4,15 +4,38 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 5rem 0; /* py-20 equivalent */
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-color: #0f172a; /* bot-dark */
+  min-height: 90vh;
 }
 
-@media screen and (max-width: 996px) {
+@media screen and (min-width: 768px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 8rem 0; /* py-32 equivalent on larger screens */
+  }
+}
+
+/* Handbook Badge Styling */
+.handbookBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem; /* py-1 px-3 */
+  border-radius: 9999px; /* rounded-full */
+  background-color: rgba(0, 242, 255, 0.1); /* bg-[#00f2ff]/10 */
+  color: #00f2ff; /* text-[#00f2ff] */
+  font-size: 0.625rem; /* text-[10px] */
+  font-weight: 700; /* font-bold */
+  letter-spacing: 0.05em; /* tracking-widest */
+  text-transform: uppercase;
+  margin-bottom: 1.5rem; /* mb-6 */
+  border: 1px solid rgba(0, 242, 255, 0.3); /* border-[#00f2ff]/30 */
+}
+
+@media screen and (max-width: 767px) {
+  .heroBanner {
+    padding: 5rem 1rem;
   }
 }
 
@@ -32,5 +55,92 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.heroGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: white;
+}
+
+.heroImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  position: relative;
+}
+
+.pulseImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  animation: pulse 4s infinite, floating 3s ease-in-out infinite;
+}
+
+
+/* Bakki animations same rahengi */
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(0, 242, 255, 0); }
+}
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 0.5s forwards;
+}
+
+/* Hero Button Styles */
+.heroButton {
+  background: linear-gradient(to right, #2563eb, #22d3ee); /* bot-blue to bot-cyan */
+  border: none;
+  color: white !important;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero__title {
+  font-size: 3rem; /* text-5xl equivalent */
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.heroButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.5) !important; /* bot-cyan glow */
+  text-decoration: none !important;
+  color: white !important;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 996px) {
+  .heroGrid {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .heroText {
+    align-items: center;
+  }
+
+  .buttons {
+    justify-content: center;
   }
 }

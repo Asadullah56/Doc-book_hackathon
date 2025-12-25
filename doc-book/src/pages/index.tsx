@@ -4,7 +4,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
+import Heading from '@theme/Heading' ;
+import Head from '@docusaurus/Head';
 
 import styles from './index.module.css';
 
@@ -13,16 +14,30 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          Humanoid Academy
-        </Heading>
-        <p className="hero__subtitle">A Practical Handbook on Physical AI and Humanoid Robotics </p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--primary button--lg"
-            to="/intro">
-            Explore the Library
-          </Link>
+        <div className={clsx(styles.heroGrid, "flex flex-col md:flex-row items-center justify-between gap-10")}>
+          <div className={clsx(styles.heroText, "flex-1")}>
+            <div className={styles.handbookBadge}>
+              Handbook
+            </div>
+            <Heading as="h1" className={clsx("hero__title", styles.fadeIn)}>
+              Humanoid Academy
+            </Heading>
+            <p className={clsx("hero__subtitle", styles.fadeIn)}>A Practical Handbook on Physical AI and Humanoid Robotics </p>
+            <div className={styles.buttons}>
+              <Link
+                className={clsx("button button--primary button--lg", styles.heroButton)}
+                to="/intro">
+                Explore the Library
+              </Link>
+            </div>
+          </div>
+          <div className={clsx(styles.heroImage, "flex-1 max-w-[350px] md:max-w-[500px] w-full h-auto object-contain")}>
+            <img
+              src="/img/robot-hero.jpg"
+              alt="Robot Hero"
+              className={clsx(styles.floatingImage, styles.pulseImage, "w-full h-auto object-contain")}
+            />
+          </div>
         </div>
       </div>
     </header>
@@ -32,9 +47,11 @@ function HomepageHeader() {
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <Layout
-      title={`Humanoid Academy - ${siteConfig.tagline}`}
-      description="Mastering Physical AI: From ROS 2 Foundations to Autonomous Humanoid Systems">
+    <Layout>
+      <Head>
+        <title>Humanoid Academy - {siteConfig.tagline}</title>
+        <meta name="description" content="Mastering Physical AI: From ROS 2 Foundations to Autonomous Humanoid Systems" />
+      </Head>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

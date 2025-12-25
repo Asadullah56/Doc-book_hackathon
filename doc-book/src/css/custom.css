@@ -32,11 +32,17 @@
 /* Main background styling */
 html {
   background-color: #ffffff;
+  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden !important;
 }
 
 body {
   background-color: #ffffff;
   color: #2e2e2e;
+  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden !important;
 }
 
 /* Code block styling */
@@ -46,10 +52,11 @@ code {
   border-radius: 8px;
 }
 
-/* Navbar styling with original green theme */
+/* Navbar styling with robotics aesthetic */
 .navbar {
-  background-color: #0d7e5c !important;
-  border-bottom: 1px solid #0b7152 !important;
+  background-color: rgba(15, 23, 42, 0.8) !important; /* bot-dark with 80% opacity */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.2) !important; /* bot-cyan with 20% opacity */
   position: sticky;
   top: 0;
   z-index: var(--ifm-z-index-fixed);
@@ -213,19 +220,25 @@ code {
 }
 
 /* Sticky Footer Implementation */
+html, body {
+  margin: 0;
+}
+
 html,
 body {
   height: 100%;
   min-height: 100vh;
-  
+
   margin: 0;
   padding: 0;
 }
 
 #__docusaurus {
+  overflow-y: auto !important;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 100vh;
 }
 
 .main-wrapper {
@@ -238,11 +251,14 @@ body {
   flex: 1 0 auto;
 }
 
-/* Footer Styling for Compact Professional Look */
+/* Footer Styling with Robotics Aesthetics */
 footer.footer {
   margin-top: auto;
-  background-color: #1a5e3a !important;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  z-index: 10;
+  background-color: #0f172a !important; /* bot-dark */
+  border-top: 2px solid rgba(34, 211, 238, 0.3) !important; /* bot-cyan glow effect */
+  box-shadow: 0 -5px 15px rgba(34, 211, 238, 0.1); /* bot-cyan top glow */
 }
 
 .footer__title {
@@ -254,7 +270,7 @@ footer.footer {
 }
 
 .footer__link-item:hover {
-  color: var(--ifm-color-primary-light);
+  color: #22d3ee !important; /* bot-cyan */
 }
 
 .footer__copyright {
@@ -293,7 +309,7 @@ footer.footer {
 }
 
 .footer__link-item:hover {
-  color: var(--ifm-footer-link-hover-color, var(--ifm-color-primary));
+  color: #22d3ee !important; /* bot-cyan */
 }
 
 /* Footer copyright styling */
@@ -303,4 +319,15 @@ footer.footer {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--ifm-color-emphasis-800);
+}
+
+/* Hover glow animation class */
+.hover-glow {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); /* bot-cyan color */
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px 5px rgba(34, 211, 238, 0.6); /* bot-cyan glow effect */
+  transform: translateY(-2px);
 }

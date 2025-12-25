@@ -71,7 +71,7 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: '[ Project Info ]',
+          title: ' Project Info ',
           items: [
             {
               label: 'Mission',
@@ -84,28 +84,28 @@ const config: Config = {
           ],
         },
         {
-          title: '[ Modules ]',
+          title: ' Modules ',
           items: [
             {
               label: 'Module 1 (Nervous System)',
-              to: '/docs/module-1/chapter-1-the-ros-2-communication-backbone',
+              to: 'module-1/ros2-communication-backbone',
             },
             {
               label: 'Module 2 (Digital Twin)',
-              to: '/docs/module-2/chapter-1-gazebo-physics-simulation',
+              to: 'module-2/chapter-1-gazebo-physics',
             },
             {
               label: 'Module 3 (AI Brain)',
-              to: '/docs/module-3/chapter-1-photorealistic-intelligence',
+              to: 'module-3/chapter-1-photorealistic-intelligence',
             },
             {
               label: 'Module 4 (VLA Capstone)',
-              to: '/docs/module-4/chapter-1-voice-to-action',
+              to: 'module-4/chapter-1-voice-to-action',
             },
           ],
         },
         {
-          title: '[ Tools ]',
+          title: ' Tools ',
           items: [
             {
               label: 'ROS 2 Humble',
@@ -126,11 +126,11 @@ const config: Config = {
           ],
         },
         {
-          title: '[ Community ]',
+          title: ' Community ',
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/',
+              href: 'https://github.com/Asadullah56',
             },
             {
               label: 'LinkedIn',
@@ -143,7 +143,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© 2025 doc-book-By-Asad | Built with Docusaurus | Humanoid Academy`,
+      copyright: `© 2025 doc-book-Made-By-Asad | Built with Docusaurus | Humanoid Academy`,
     },
 
     prism: {
