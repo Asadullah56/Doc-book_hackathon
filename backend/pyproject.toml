@@ -8,7 +8,10 @@ dependencies = [
     "cohere",
     "qdrant-client",
     "beautifulsoup4",
+    "fastapi",
     "httpx",
+    "openai",
     "python-dotenv",
     "tiktoken",
+    "uvicorn",
 ]

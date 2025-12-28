@@ -320,20 +320,26 @@ source = { virtual = "backend" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "cohere" },
+    { name = "fastapi" },
     { name = "httpx" },
+    { name = "openai" },
     { name = "python-dotenv" },
     { name = "qdrant-client" },
     { name = "tiktoken" },
+    { name = "uvicorn" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "beautifulsoup4" },
     { name = "cohere" },
+    { name = "fastapi" },
     { name = "httpx" },
+    { name = "openai" },
     { name = "python-dotenv" },
     { name = "qdrant-client" },
     { name = "tiktoken" },
+    { name = "uvicorn" },
 ]
 
 [[package]]

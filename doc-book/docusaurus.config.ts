@@ -21,6 +21,11 @@ const config: Config = {
     locales: ['en'],
   },
 
+  // Custom fields for configuration
+  customFields: {
+    backendUrl: process.env.SITE_BACKEND_URL || 'http://127.0.0.1:8000',
+  },
+
   presets: [
     [
       'classic',

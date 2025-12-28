@@ -60,3 +60,50 @@ This will:
 **Active Focus: Spec 1 - Embedding Pipeline**
 
 The system is currently focused on implementing the embedding pipeline that extracts text from deployed Docusaurus URLs, generates embeddings using Cohere, and stores them in Qdrant for RAG-based retrieval. The pipeline successfully processes content and stores it in a searchable vector database.
+
+## Running the API Server
+
+To run the FastAPI server that serves the chatbot API:
+
+1. Make sure you have the required dependencies installed:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Ensure your `.env` file contains the required API keys:
+   ```env
+   COHERE_API_KEY=your_cohere_api_key_here
+   QDRANT_URL=your_qdrant_cluster_url_here
+   QDRANT_API_KEY=your_qdrant_api_key_here
+   OPENROUTER_API_KEY=your_openrouter_api_key_here
+   OPENROUTER_MODEL=mistralai/devstral-2512:free
+   ```
+
+3. Start the API server:
+   ```bash
+   uvicorn api:app --host 0.0.0.0 --port 8000
+   ```
+
+4. The API will be available at `http://localhost:8000`
+   - Health check: `http://localhost:8000/health`
+   - Chat endpoint: `http://localhost:8000/ask`
+
+## Starting the Server
+
+To start the backend server, run:
+
+```bash
+cd backend
+uvicorn api:app --host 0.0.0.0 --port 8000
+```
+
+Or use the provided script:
+- On Windows: `start-server.bat`
+- On Linux/Mac: `chmod +x start-server.sh && ./start-server.sh`
+
+## Troubleshooting
+
+1. If you get "failed to fetch" errors, ensure the backend server is running
+2. Check that the `.env` file contains all required API keys
+3. Make sure port 8000 is not being used by another application
+4. Check the server logs for any error messages

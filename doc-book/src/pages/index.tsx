@@ -22,10 +22,13 @@ function HomepageHeader() {
             <Heading as="h1" className={clsx("hero__title", styles.fadeIn)}>
               Humanoid Academy
             </Heading>
-            <p className={clsx("hero__subtitle", styles.fadeIn)}>A Practical Handbook on Physical AI and Humanoid Robotics </p>
+            <p className={clsx("hero__subtitle", styles.fadeIn)}>A Practical Handbook on Physical AI and Humanoid Robotics</p>
+            <div className={clsx("hero__description", styles.fadeIn)}>
+              The ultimate technical manual for building the future. Master fundamental <span className={clsx(styles.highlightKeyword)}>ROS 2</span> foundations, integrate advanced <span className={clsx(styles.highlightKeyword)}>AI brains</span>, and orchestrate complex <span className={clsx(styles.highlightKeyword)}>humanoid systems</span> through a structured 4-module <span className={clsx(styles.typewriterWord)}>journey<span className={styles.cursor}>|</span></span>.
+            </div>
             <div className={styles.buttons}>
               <Link
-                className={clsx("button button--primary button--lg", styles.heroButton)}
+                className={clsx("button button--lg", styles.heroButton)}
                 to="/intro">
                 Explore the Library
               </Link>

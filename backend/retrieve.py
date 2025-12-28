@@ -1,4 +1,5 @@
 import os
+import sys
 import cohere
 from qdrant_client import QdrantClient
 from typing import List, Dict
@@ -7,14 +8,18 @@ from typing import List, Dict
 from dotenv import load_dotenv
 load_dotenv()
 
+# Use stderr for logging to work with uvicorn
+def log_debug(msg):
+    print(f"[DEBUG] {msg}", file=sys.stderr)
 
-def retrieve_context(query: str, threshold: float = 0.3, limit: int = 3):
+
+def retrieve_context(query: str, threshold: float = 0.0, limit: int = 3):
     """
-    Retrieve the most relevant text chunks from Qdrant based on a query.
+    Retrieve most relevant text chunks from Qdrant based on a query.
 
     Args:
         query (str): The user query to search for
-        threshold (float): Minimum similarity score for results (default 0.3)
+        threshold (float): Minimum similarity score for results (default 0.0)
         limit (int): Maximum number of results to return (default 3)
 
     Returns:
@@ -39,7 +44,7 @@ def retrieve_context(query: str, threshold: float = 0.3, limit: int = 3):
         )
         query_embedding = response.embeddings[0]
     except Exception as e:
-        print(f"Error generating query embedding: {e}")
+        log_debug(f"Error generating query embedding: {e}")
         return []
 
     # Initialize Qdrant client
@@ -51,22 +56,42 @@ def retrieve_context(query: str, threshold: float = 0.3, limit: int = 3):
         timeout=10
     )
 
-    # Perform search in Qdrant - using the modern query_points API
+    # Debug: Check if collection exists and has data
     try:
-        # Using the modern query_points API as requested
-        response = client.query_points(
+        collections = client.get_collections()
+        collection_names = [col.name for col in collections.collections]
+        log_debug(f"Available collections: {collection_names}")
+
+        if "rag_embedding" in collection_names:
+            collection_info = client.get_collection("rag_embedding")
+            log_debug(f"Collection 'rag_embedding' found with {collection_info.points_count} points")
+        else:
+            log_debug(f"WARNING: Collection 'rag_embedding' not found!")
+    except Exception as e:
+        log_debug(f"Error checking collection: {e}")
+
+    # Perform search in Qdrant - using search API
+    try:
+        log_debug(f"Query: '{query}'")
+        log_debug(f"Embedding dimension: {len(query_embedding)}")
+
+        search_results = client.search(
             collection_name="rag_embedding",
-            query=query_embedding,
+            query_vector=query_embedding,
             limit=limit * 2,  # Get more results than needed for threshold filtering
             with_payload=True
         )
 
-        # Extract results from the response
-        search_results = response.points
+        log_debug(f"Raw search results from Qdrant: {len(search_results)} results")
+
+        # Debug: print first few scores
+        for i, result in enumerate(search_results[:5]):
+            log_debug(f"Result {i+1}: score={result.score:.4f}, text='{result.payload.get('text', '')[:80]}...'")
 
         # Filter results based on threshold and format output
         filtered_results = []
         for result in search_results:
+            log_debug(f"Filtering: score={result.score:.4f} vs threshold={threshold}, match={result.score >= threshold}")
             if result.score >= threshold:
                 filtered_results.append({
                     'text': result.payload.get('text', '')[:200] + "..." if len(result.payload.get('text', '')) > 200 else result.payload.get('text', ''),
@@ -78,41 +103,13 @@ def retrieve_context(query: str, threshold: float = 0.3, limit: int = 3):
         # Limit to top 3 results after filtering
         filtered_results = filtered_results[:limit]
 
+        log_debug(f"After threshold filtering: {len(filtered_results)} results")
         return filtered_results
 
-    except AttributeError as e:
-        # If query_points method doesn't exist, fall back to search method
-        print(f"Modern query_points API not available: {e}")
-        print("Falling back to search API...")
-
-        try:
-            search_results = client.search(
-                collection_name="rag_embedding",
-                query_vector=query_embedding,
-                limit=limit * 2,
-                with_payload=True
-            )
-
-            # Filter results based on threshold and format output
-            filtered_results = []
-            for result in search_results:
-                if result.score >= threshold:
-                    filtered_results.append({
-                        'text': result.payload.get('text', '')[:200] + "..." if len(result.payload.get('text', '')) > 200 else result.payload.get('text', ''),
-                        'score': result.score,
-                        'url': result.payload.get('url', ''),
-                        'chapter_title': result.payload.get('chapter_title', '')
-                    })
-
-            # Limit to top 3 results after filtering
-            filtered_results = filtered_results[:limit]
-
-            return filtered_results
-        except Exception as e2:
-            print(f"Error searching in Qdrant: {e2}")
-            return []
     except Exception as e:
-        print(f"Error searching in Qdrant: {e}")
+        log_debug(f"Error searching in Qdrant: {e}")
+        import traceback
+        traceback.print_exc()
         return []
 
 
@@ -124,7 +121,7 @@ def display_retrieval_results(results: List[Dict]):
         results (List[Dict]): List of retrieval results
     """
     if not results:
-        print("No results found for the query.")
+        print("No results found for query.")
         return
 
     print(f"\nFound {len(results)} relevant results:\n")
@@ -133,7 +130,9 @@ def display_retrieval_results(results: List[Dict]):
         print(f"  Score: {result['score']:.4f}")
         print(f"  Source: {result['url']}")
         print(f"  Chapter: {result['chapter_title']}")
-        print(f"  Text: {result['text']}")
+        # Handle unicode characters safely in text output
+        text = result['text'].encode('utf-8', errors='ignore').decode('utf-8')
+        print(f"  Text: {text}")
         print()
 
 
@@ -151,7 +150,7 @@ def main():
 
     print("Environment variables validated")
 
-    test_query = "Explain the ROS 2 communication backbone in Module 1"
+    test_query = "Explain ROS 2 communication backbone in Module 1"
     print(f"Testing retrieval with query: '{test_query}'")
 
     results = retrieve_context(test_query)

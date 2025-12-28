@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
-
+  
 type FeatureItem = {
   title: string;
   description: ReactNode;
@@ -87,7 +87,7 @@ export default function HomepageFeatures(): ReactNode {
           <Heading as="h2" style={{ color: 'var(--bot-cyan)' }}>The 4 Modules of Humanoid Academy</Heading>
           <p className="hero__subtitle" style={{ color: '#9ca3af' }}>Master each foundational element of autonomous humanoid development</p>
         </div>
-        <div className={clsx('row', styles.featureGrid)}>
+        <div className={clsx('row', 'max-w-5xl mx-auto', styles.featureGrid)}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}

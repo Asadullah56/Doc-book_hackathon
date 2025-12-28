@@ -9,13 +9,13 @@
   z-index: 1;
 }
 
-/* Responsive grid container */
+/* Responsive grid container - 2x2 on desktop */
 .featureGrid {
   display: grid !important;
   grid-template-columns: repeat(1, 1fr);
   gap: 1.5rem; /* gap-6 */
   padding: 2rem 1rem;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -27,7 +27,7 @@
 
 @media (min-width: 1024px) {
   .featureGrid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Changed from 4 to 2 columns */
   }
 }
 
@@ -47,13 +47,13 @@
   border-radius: 0.5rem !important;
   transition: all 0.3s ease;
   color: white;
-  padding: 2.5rem !important; /* p-10 */
+  padding: 2.5rem 2rem !important; /* py-10 px-8 */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .featureCard:hover {
   border-color: #22d3ee !important; /* bot-cyan */
-  transform: translateY(-8px);
+  transform: scale(1.05) translateY(-8px); /* Added scale effect */
   box-shadow: 0 0 20px rgba(0, 242, 255, 0.2) !important; /* glow effect */
 }
 
@@ -77,6 +77,7 @@
   margin-bottom: 1rem; /* increased margin */
   font-weight: 600;
   font-size: 2.25rem; /* text-3xl */
+  text-align: center; /* Centered heading */
 }
 
 .cardDescription {
