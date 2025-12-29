@@ -68,7 +68,7 @@ const ChatBubble: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch(`${backendUrl}/ask`, {
+      const response = await fetch(`https://asadullah56-deploy-project-1.hf.space/ask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -42,11 +42,22 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://localhost:8000",
         "http://127.0.0.1:8000",
-    ],  # Allow Docusaurus dev server and backend local access
+        "https://doc-book-hackathon.vercel.app",
+        "https://*.hf.space",
+    ],
+    allow_origin_regex=r"https://.*\.hf\.space",  # Match any *.hf.space domain
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
 )
+
+
+@app.get("/")
+async def root():
+    """
+    Root endpoint to verify the API is running.
+    """
+    return {"status": "running"}
 
 
 @app.post("/ask", response_model=QueryResponse)
@@ -107,4 +118,4 @@ async def health_check():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=7860)
